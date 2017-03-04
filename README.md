@@ -1,6 +1,8 @@
 # testBottomNavigationBar是仿照TapTap做的一个demo,运用了Rxjava+Retrofit+MaterialDesign知识
 ---------------------------------
 ##项目截图
+![image](https://github.com/BLiYing/testBottomNavigationBar/Screenshot_01.png)
+![image](https://github.com/BLiYing/testBottomNavigationBar/Screenshot_02.png)
 
 
 
