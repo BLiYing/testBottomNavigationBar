@@ -1,11 +1,17 @@
 package com.helin.rxsample.enity;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by liukun on 16/3/5.
  */
-public class Subject {
+@SuppressLint("ParcelCreator")
+public class Subject implements Parcelable{
 
     private String id;
     private String alt;
@@ -13,9 +19,10 @@ public class Subject {
     private String title;
     private String original_title;
     private List<String> genres;
-    private List<Cast> casts;
-    private List<Cast> directors;
+    private List<Cast> casts = new ArrayList<>();
+    private List<Cast> directors = new ArrayList<>();
     private Avatars images;
+
 
     @Override
     public String toString() {
@@ -97,77 +104,65 @@ public class Subject {
         this.images = images;
     }
 
-    private class Cast{
-        private String id;
-        private String name;
-        private String alt;
-        private Avatars avatars;
+    protected Subject(Parcel in){
+         id = in.readString();
+        alt = in.readString();
+        year = in.readString();
+        title = in.readString();
+        original_title = in.readString();
+        genres = in.createStringArrayList();
+//        in.readList(casts,casts.getClass().getClassLoader());
+//        in.readList(directors,directors.getClass().getClassLoader());
+        in.readTypedList(casts,Cast.CREATOR);
+        in.readTypedList(directors,Cast.CREATOR);
+        images = in.readParcelable(images.getClass().getClassLoader());
+    }
 
-        public String getId() {
-            return id;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    /* private String id;
+    private String alt;
+    private String year;
+    private String title;
+    private String original_title;
+    private List<String> genres;
+    private List<Cast> casts;
+    private List<Cast> directors;
+    private Avatars images;*/
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.alt);
+        dest.writeString(this.year);
+        dest.writeString(this.title);
+        dest.writeString(this.original_title);
+        dest.writeStringList(this.genres);
+//        dest.writeList(this.casts);
+//        dest.writeList(this.directors);
+        dest.writeTypedList(casts);
+        dest.writeTypedList(directors);
+        dest.writeParcelable(this.images,flags);
+    }
 
-        public String getName() {
-            return name;
-        }
+    public static final Parcelable.Creator<Subject> CREATOR = new Parcelable.Creator<Subject>(){
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAlt() {
-            return alt;
-        }
-
-        public void setAlt(String alt) {
-            this.alt = alt;
-        }
-
-        public Avatars getAvatars() {
-            return avatars;
-        }
-
-        public void setAvatars(Avatars avatars) {
-            this.avatars = avatars;
+        @Override
+        public Subject createFromParcel(Parcel source) {
+            return new Subject(source);
         }
 
         @Override
-        public String toString() {
-            return "cast.id=" + id + " cast.name=" + name + " | ";
+        public Subject[] newArray(int size) {
+            return new Subject[size];
         }
-    }
+    };
 
-    private class Avatars{
-        private String small;
-        private String medium;
-        private String large;
 
-        public String getSmall() {
-            return small;
-        }
 
-        public void setSmall(String small) {
-            this.small = small;
-        }
 
-        public String getMedium() {
-            return medium;
-        }
 
-        public void setMedium(String medium) {
-            this.medium = medium;
-        }
 
-        public String getLarge() {
-            return large;
-        }
-
-        public void setLarge(String large) {
-            this.large = large;
-        }
-    }
 }

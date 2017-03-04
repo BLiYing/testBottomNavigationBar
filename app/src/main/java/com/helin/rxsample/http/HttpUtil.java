@@ -76,8 +76,8 @@ public class HttpUtil {
     }
 
 //    public void getTopMovie(final ProgressSubscriber<List<Subject>> subscriber, int start, int count) {
-//        movieService = retrofit.create(ApiService.class);
-//        Api.getDefault().getTopMovie(start, count)
+//        movieService = retrofit.create(ApiGetDoubanMovie.class);
+//        Api.getDoubanService().getTopMovie(start, count)
 //                .map(new HttpResultFunc<List<Subject>>())
 //                .subscribeOn(Schedulers.io())
 //                .unsubscribeOn(Schedulers.io())
@@ -95,11 +95,11 @@ public class HttpUtil {
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(subscriber);
 //
-//        toSubscribe(Api.getDefault().getTopMovie(start, count), subscriber,"getMove");
+//        toSubscribe(Api.getDoubanService().getTopMovie(start, count), subscriber,"getMove");
 //    }
 
 //    public void userLogin(final ProgressSubscriber<UserEntity> subscriber, String name, String psw) {
-//        Observable observer =  Api.getDefault().userLogin(name, psw, 4, "aaassdasd");
+//        Observable observer =  Api.getDoubanService().userLogin(name, psw, 4, "aaassdasd");
 //                .map(new HttpResultFunc2<UserEntity>());
 //                .subscribeOn(Schedulers.io())
 //                .unsubscribeOn(Schedulers.io())
@@ -133,7 +133,14 @@ public class HttpUtil {
      * @param isSave 是否缓存
      * @param forceRefresh 是否强制刷新
      */
-    public void toSubscribe(Observable ob, final ProgressSubscriber subscriber, String cacheKey, final ActivityLifeCycleEvent event, final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject,boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(Observable ob,
+                            final ProgressSubscriber subscriber,
+                            String cacheKey,
+                            final ActivityLifeCycleEvent event,
+                            final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject,
+                            boolean isSave,
+                            boolean forceRefresh,
+                            final boolean isShowDialog) {
         //数据预处理
         Observable.Transformer<HttpResult<Object>, Object> result = RxHelper.handleResult(event,lifecycleSubject);
         Observable observable = ob.compose(result)
@@ -142,7 +149,8 @@ public class HttpUtil {
                     @Override
                     public void call() {
                         //显示Dialog和一些其他操作
-                        subscriber.showProgressDialog();
+                        if(isShowDialog)
+                            subscriber.showProgressDialog();
                     }
                 });
         RetrofitCache.load(cacheKey,observable,isSave,forceRefresh).subscribe(subscriber);

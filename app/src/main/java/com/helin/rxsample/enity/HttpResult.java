@@ -11,6 +11,10 @@ public class HttpResult<T> {
     //用来模仿Data
     private T subjects;
 
+    private int start;
+    private int total;
+    private String title;
+
     public int getCount() {
         return count;
     }
@@ -51,37 +55,7 @@ public class HttpResult<T> {
         this.subjects = subjects;
     }
 
-    private int start;
-    private int total;
-    private String title;
 
-//    public T getData() {
-//        return data;
-//    }
-//
-//    public void setData(T data) {
-//        this.data = data;
-//    }
-//
-//    private int code;
-//
-//    public int getCode() {
-//        return code;
-//    }
-//
-//    public void setCode(int code) {
-//        this.code = code;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
-//
-//    private String message;
-//
-//    private T data;
+
+
 }

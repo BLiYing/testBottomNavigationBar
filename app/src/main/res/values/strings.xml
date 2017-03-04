@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">testBottomNavigationBar</string>
+    <string name="action_save">save</string>
+    <string name="action_share">share</string>
+    <string name="meizhi">MeiZhi</string>
+    <string name="action_about">关于我</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text">large_text</string>
+    <string name="version_str">PrettyGirls\npleasecallmecoder</string>
+    <string name="no_network">请先连接网络</string>
+
+    <string name="loading">玩命加载中...</string>
+    <string name="tryagain">数据加载失败，点击重试</string>
+
+
 </resources>

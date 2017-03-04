@@ -28,6 +28,7 @@ public class RetrofitCache {
         Observable<T> fromCache = Observable.create(new Observable.OnSubscribe<T>() {
             @Override
             public void call(Subscriber<? super T> subscriber) {
+                @SuppressWarnings("unchecked")
                 T cache = (T) Hawk.get(cacheKey);
                 if (cache != null) {
                     subscriber.onNext(cache);
@@ -57,7 +58,7 @@ public class RetrofitCache {
             return Observable.concat(fromCache, fromNetwork).takeFirst(new Func1<T, Boolean>() {
                 @Override
                 public Boolean call(T t) {
-                    return t!=null;
+                    return t != null;
                 }
             });
         }

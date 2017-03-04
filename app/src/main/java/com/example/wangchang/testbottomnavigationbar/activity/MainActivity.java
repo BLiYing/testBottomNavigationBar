@@ -1,12 +1,12 @@
 package com.example.wangchang.testbottomnavigationbar.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -19,30 +19,50 @@ import com.example.wangchang.testbottomnavigationbar.fragment.MusicFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.TvFragment;
 import com.helin.rxsample.base.ActivityLifeCycleEvent;
 import com.helin.rxsample.base.BaseActivity;
-import com.helin.rxsample.enity.Subject;
-import com.helin.rxsample.http.Api;
-import com.helin.rxsample.http.HttpUtil;
-import com.helin.rxsample.http.ProgressSubscriber;
+import com.helin.rxsample.util.NetUtil;
+import com.helin.rxsample.util.ToastUtils;
 import com.helin.rxsample.view.SimpleLoadDialog;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
+import rx.subjects.PublishSubject;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
+    @BindView(R.id.toolBar_home)
+    Toolbar toolBarHome;
     private ArrayList<Fragment> fragments;
+    private Context mContext;
 
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
+    private HomeFragment homeFragment;
+    private BookFragment bookFragment;
+    private MusicFragment musicFragment;
+    private TvFragment tvFragment;
+    private GameFragment gameFragment;
+
     private BadgeItem numberBadgeItem;
     private SimpleLoadDialog dialogHandler;
+    public static MainActivity activity;
+
+    public static MainActivity getInstance() {
+        if (activity != null) {
+            return activity;
+        }
+        return activity;
+    }
+
+    public PublishSubject<ActivityLifeCycleEvent> getLifeSubject() {
+        return lifecycleSubject;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
+
+        mContext = this;
+        activity = this;
         ButterKnife.bind(this);
         initToolBar();
         dialogHandler = new SimpleLoadDialog(MainActivity.this, null, true);
@@ -51,12 +71,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
                 );
-         numberBadgeItem = new BadgeItem()
+        numberBadgeItem = new BadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_book_white_24dp, "Books").setActiveColorResource(R.color.teal))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.blue))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.brown))
@@ -64,104 +84,106 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setFirstSelectedPosition(0)
                 .initialise();
 
-        fragments = getFragments();
+//        fragments = getFragments();
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
+        if(!NetUtil.isConnected(mContext)){
+            bottomNavigationBar.unHide();
+        }
     }
 
-    private void initToolBar(){
-        toolBar.setTitle("TapTap");
-        toolBar.setSubtitle("这里是子标题");
-        toolBar.setLogo(R.mipmap.ic_launcher);
-        setSupportActionBar(toolBar);
+    private void initToolBar() {
+        toolBarHome.setTitle("TapTap");
+        toolBarHome.setSubtitle("这里是子标题");
+        toolBarHome.setLogo(R.mipmap.ic_launcher);
+        setSupportActionBar(toolBarHome);
     }
 
-    private void initToolBarPosition_One(){
-        toolBar.setTitle("第二个fragment");
-        toolBar.setSubtitle("这里是子标题");
-        toolBar.setLogo(R.mipmap.app_icon);
-        setSupportActionBar(toolBar);
+    private void initToolBarPosition_One() {
+        toolBarHome.setTitle("豆瓣电影Top250");
+        toolBarHome.setSubtitle("");
+//        toolBar.setLogo(R.mipmap.app_icon);
+        setSupportActionBar(toolBarHome);
     }
+
     /**
      * 设置默认的
      */
     private void setDefaultFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.layFrame, HomeFragment.newInstance("Home"));
+        homeFragment = HomeFragment.newInstance("Home");
+        transaction.replace(R.id.layFrame, homeFragment);
         transaction.commit();
     }
 
     private ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.newInstance("Home"));
-        fragments.add(BookFragment.newInstance("Books"));
-        fragments.add(MusicFragment.newInstance("Music"));
-        fragments.add(TvFragment.newInstance("Movies & TV"));
-        fragments.add(GameFragment.newInstance("Games"));
+        homeFragment = (HomeFragment.newInstance("Home"));
+        fragments.add(homeFragment);
+        bookFragment = BookFragment.newInstance("Books");
+        fragments.add(bookFragment);
+        musicFragment = MusicFragment.newInstance("Music");
+        fragments.add(musicFragment);
+        tvFragment = TvFragment.newInstance("Movies & TV");
+        fragments.add(tvFragment);
+        gameFragment = GameFragment.newInstance("Games");
+        fragments.add(gameFragment);
         return fragments;
     }
 
 
     @Override
     public void onTabSelected(int position) {
-        if (fragments != null) {
-            if (position < fragments.size()) {
-                if(position == 0){
-                    initToolBar();
-                    doGet();
-                    numberBadgeItem.setBorderWidth(4)
-                            .setBackgroundColor(Color.RED)
-                            .setText("4")
-                            .setHideOnSelect(true);
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        switch (position) {
+            case 0:
+                initToolBar();
+                if (homeFragment == null) {
+                    homeFragment = (HomeFragment.newInstance("Home"));
                 }
-                else if(position == 1){
-                    initToolBarPosition_One();
-                }else{
-                    initToolBar();
+
+                transaction.replace(R.id.layFrame, homeFragment);
+                transaction.commit();
+                break;
+            case 1:
+                initToolBarPosition_One();
+                if (bookFragment == null) {
+                    bookFragment = BookFragment.newInstance("Books");
                 }
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                Fragment fragment = fragments.get(position);
-                if (fragment.isAdded()) {
-                    ft.replace(R.id.layFrame, fragment);
-                } else {
-                    ft.add(R.id.layFrame, fragment);
+                transaction.replace(R.id.layFrame, bookFragment);
+                transaction.commit();
+                break;
+            case 2:
+                if (musicFragment == null) {
+                    musicFragment = MusicFragment.newInstance("Music");
                 }
-                ft.commitAllowingStateLoss();
-            }
+                transaction.replace(R.id.layFrame, musicFragment);
+                transaction.commit();
+                break;
+            case 3:
+                if (tvFragment == null) {
+                    tvFragment = TvFragment.newInstance("Movies & TV");
+                }
+                transaction.replace(R.id.layFrame, tvFragment);
+                transaction.commit();
+                break;
+            case 4:
+                if (gameFragment == null) {
+                    gameFragment = GameFragment.newInstance("Games");
+                }
+                transaction.replace(R.id.layFrame, gameFragment);
+                transaction.commit();
+                break;
+            default:
+                break;
         }
+
+
     }
 
-    private void doGet() {
-        //获取豆瓣电影TOP 100
-        Observable ob = Api.getDefault().getTopMovie(0, 100);
-        //嵌套请求
-//        ob.flatMap(new Func1<String, Observable<HttpResult<Subject>>>() {
-//
-//            @Override
-//            public Observable<HttpResult<Subject>> call(String s) {
-//                return Api.getDefault().getUser("aa");
-//            }
-//        });
-
-
-        HttpUtil.getInstance().toSubscribe(ob, new ProgressSubscriber<List<Subject>>(this) {
-            @Override
-            protected void _onError(String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected void _onNext(List<Subject> list) {
-                String str = "";
-                for (int i = 0; i < list.size(); i++) {
-                    str += "电影名：" + list.get(i).getTitle() + "\n";
-                }
-                Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
-            }
-        }, "cacheKey", ActivityLifeCycleEvent.DESTROY, lifecycleSubject, false, false);
-    }
 
     @Override
     public void onTabUnselected(int position) {

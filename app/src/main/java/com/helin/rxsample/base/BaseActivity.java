@@ -13,25 +13,6 @@ public class BaseActivity extends AppCompatActivity {
 
     public final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
 
-//    @NonNull
-//    public <T> Observable.Transformer<T, T> bindUntilEvent(@NonNull final ActivityLifeCycleEvent event) {
-//        return new Observable.Transformer<T, T>() {
-//            @Override
-//            public Observable<T> call(Observable<T> sourceObservable) {
-//                Observable<ActivityLifeCycleEvent> compareLifecycleObservable =
-//                        lifecycleSubject.takeFirst(new Func1<ActivityLifeCycleEvent, Boolean>() {
-//                            @Override
-//                            public Boolean call(ActivityLifeCycleEvent activityLifeCycleEvent) {
-//                                return activityLifeCycleEvent.equals(event);
-//                            }
-//                        });
-//                return sourceObservable.takeUntil(compareLifecycleObservable);
-//            }
-//        };
-//    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         lifecycleSubject.onNext(ActivityLifeCycleEvent.CREATE);

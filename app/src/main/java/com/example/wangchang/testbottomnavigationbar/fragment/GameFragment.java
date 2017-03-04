@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
 
+
 /**
  * Created by WangChang on 2016/5/15.
  */
@@ -18,14 +19,14 @@ public class GameFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_games, container, false);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView tv = (TextView) getActivity().findViewById(R.id.tv);
+        TextView tv = (TextView) getActivity().findViewById(R.id.games_tv);
         tv.setText(getArguments().getString("ARGS"));
     }
 

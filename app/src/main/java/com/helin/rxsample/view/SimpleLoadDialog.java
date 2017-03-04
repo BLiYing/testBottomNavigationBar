@@ -73,7 +73,7 @@ public class SimpleLoadDialog extends Handler{
 
     public  void dismiss() {
         context  = reference.get();
-        if (load != null&&load.isShowing()&&!((Activity) context).isFinishing()) {
+        if (load != null && load.isShowing() && !((Activity) context).isFinishing()) {
             String name = Thread.currentThread().getName();
             load.dismiss();
             load = null;
