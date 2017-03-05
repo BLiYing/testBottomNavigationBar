@@ -4,7 +4,7 @@
 
 ![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/Screenshot1.png)
 
-![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/Screenshot2.png)
+![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/newgif.gif)
 
 ##关于RxJava 在Android中常用的使用案例,实在讲得好。 
 
