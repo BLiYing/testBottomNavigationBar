@@ -1,6 +1,7 @@
 package com.example.wangchang.testbottomnavigationbar.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,17 +15,19 @@ import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
+import com.example.wangchang.testbottomnavigationbar.activity.BookShowActivity;
 import com.example.wangchang.testbottomnavigationbar.activity.MainActivity;
 import com.example.wangchang.testbottomnavigationbar.adapter.BookAdapter;
-import com.helin.rxsample.base.ActivityLifeCycleEvent;
-import com.helin.rxsample.base.CacheKey;
-import com.helin.rxsample.base.DataKey;
-import com.helin.rxsample.enity.Subject;
-import com.helin.rxsample.http.Api;
-import com.helin.rxsample.http.HttpUtil;
-import com.helin.rxsample.http.ProgressSubscriber;
-import com.helin.rxsample.util.LogUtil;
+import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
+import com.example.wangchang.testbottomnavigationbar.base.CacheKey;
+import com.example.wangchang.testbottomnavigationbar.base.DataKey;
+import com.example.wangchang.testbottomnavigationbar.enity.Subject;
+import com.example.wangchang.testbottomnavigationbar.http.Api;
+import com.example.wangchang.testbottomnavigationbar.http.HttpUtil;
+import com.example.wangchang.testbottomnavigationbar.http.ProgressSubscriber;
+import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
@@ -110,6 +113,17 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeRefreshLayout.setProgressViewOffset(false, DataKey.swipeStart, DataKey.swipeEnd);
 //        swipeRefreshLayout.setProgressViewEndTarget (true,200);
         swipeRefreshLayout.setOnRefreshListener(this);
+        bookAdapter.setOnItemClickListener(new BookAdapter.BookItemOnclickListen() {
+            @Override
+            public void onItemClick(int position, BaseViewHolder viewHold) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, BookShowActivity.class);
+                mContext.startActivity(intent);
+
+            }
+
+
+        });
     }
 
     private void doGetDoubanMovie(int start, int count,

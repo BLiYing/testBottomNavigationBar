@@ -10,6 +10,12 @@
     <color name="blue">#2196F3</color>
     <color name="grey">#607D8B</color>
     <color name="orange">#F57C00</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="page_bg">#14b9c8</color>
+    <color name="title_color">#ffffff</color>
+    <color name="tablayout_title_color">#7D7D7D</color>
+
+    <color name="transparent">#00000000</color>
 
 </resources>

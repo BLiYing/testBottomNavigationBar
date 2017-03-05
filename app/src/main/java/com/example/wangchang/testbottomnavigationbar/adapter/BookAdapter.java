@@ -6,8 +6,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.helin.rxsample.enity.ResultsEntity;
-import com.helin.rxsample.enity.Subject;
+import com.example.wangchang.testbottomnavigationbar.enity.Subject;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

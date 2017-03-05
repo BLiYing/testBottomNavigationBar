@@ -1,22 +1,18 @@
 package com.example.wangchang.testbottomnavigationbar.exception;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
 import android.widget.Toast;
 
 import com.example.wangchang.testbottomnavigationbar.activity.MainActivity;
-import com.helin.rxsample.util.FileUtil;
+import com.example.wangchang.testbottomnavigationbar.util.FileUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Date;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 /**

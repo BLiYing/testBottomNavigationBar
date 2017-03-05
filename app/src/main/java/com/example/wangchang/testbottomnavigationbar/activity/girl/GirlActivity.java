@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.wangchang.testbottomnavigationbar.R;
-import com.helin.rxsample.util.ColorUtil;
+import com.example.wangchang.testbottomnavigationbar.util.ColorUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.wangchang.testbottomnavigationbar.R;
 import com.example.wangchang.testbottomnavigationbar.widget.PinchImageView;
-import com.helin.rxsample.enity.ResultsEntity;
+import com.example.wangchang.testbottomnavigationbar.enity.ResultsEntity;
 
 import java.util.ArrayList;
 
@@ -54,9 +54,9 @@ public class GirlAdapter extends PagerAdapter {
         Glide.with(mContext)
                 .load(imageUrl)
                 .thumbnail(0.2f)
-                .placeholder(R.drawable.ic_head)
+                .placeholder(R.mipmap.app_icon)
                 .crossFade()
-                .error(R.drawable.ic_head)
+                .error(R.drawable.icon_error)
                 .into(imageView);
         container.addView(view);
         return view;

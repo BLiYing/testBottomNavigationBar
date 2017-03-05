@@ -1,6 +1,5 @@
 package com.example.wangchang.testbottomnavigationbar.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -21,12 +18,10 @@ import com.example.wangchang.testbottomnavigationbar.fragment.GameFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.HomeFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.MusicFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.TvFragment;
-import com.helin.rxsample.base.ActivityLifeCycleEvent;
-import com.helin.rxsample.base.BaseActivity;
-import com.helin.rxsample.base.SystemBarTintManager;
-import com.helin.rxsample.util.NetUtil;
-import com.helin.rxsample.util.ToastUtils;
-import com.helin.rxsample.view.SimpleLoadDialog;
+import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
+import com.example.wangchang.testbottomnavigationbar.base.BaseActivity;
+import com.example.wangchang.testbottomnavigationbar.util.NetUtil;
+import com.example.wangchang.testbottomnavigationbar.view.SimpleLoadDialog;
 
 import java.util.ArrayList;
 
@@ -97,30 +92,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if(!NetUtil.isConnected(mContext)){
             bottomNavigationBar.unHide();
         }
-        initSystemBar();
+
     }
 
-    /*
-	 * 改变状态栏
-	 */
-    @TargetApi(19)
-    public void initSystemBar() {
-        if (android.os.Build.VERSION.SDK_INT >= 19) {
 
-            Window win = getWindow();
-            WindowManager.LayoutParams winParams = win.getAttributes();
-            // 透明状态栏
-            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            winParams.flags |= bits;
-            win.setAttributes(winParams);
-
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // 打开系统状态栏控制
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.page_bg);// 设置背景
-
-        }
-    }
 
     private void initToolBar() {
         toolBarHome.setTitle("TapTap");

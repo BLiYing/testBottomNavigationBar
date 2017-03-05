@@ -17,9 +17,9 @@ import android.widget.LinearLayout;
 
 import com.example.wangchang.testbottomnavigationbar.R;
 import com.example.wangchang.testbottomnavigationbar.widget.PinchImageView;
-import com.helin.rxsample.base.Constants;
-import com.helin.rxsample.enity.ResultsEntity;
-import com.helin.rxsample.util.BitmapUtil;
+import com.example.wangchang.testbottomnavigationbar.base.Constants;
+import com.example.wangchang.testbottomnavigationbar.enity.ResultsEntity;
+import com.example.wangchang.testbottomnavigationbar.util.BitmapUtil;
 
 import java.io.File;
 import java.util.ArrayList;

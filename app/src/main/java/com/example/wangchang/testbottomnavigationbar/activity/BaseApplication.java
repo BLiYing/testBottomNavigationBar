@@ -2,9 +2,8 @@ package com.example.wangchang.testbottomnavigationbar.activity;
 
 import android.app.Application;
 
-import com.example.wangchang.testbottomnavigationbar.exception.LocalFileHandler;
-import com.helin.rxsample.http.Api;
-import com.helin.rxsample.util.LogUtil;
+import com.example.wangchang.testbottomnavigationbar.http.Api;
+import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 import com.orhanobut.hawk.Hawk;
 
 import java.util.concurrent.TimeUnit;
