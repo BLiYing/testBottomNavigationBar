@@ -34,7 +34,9 @@ MD设计之BottomNavigation
 https://github.com/Ashok-Varma/BottomNavigation
 
 ##API来源
+
 豆瓣：https://developers.douban.com/wiki/?title=movie_v2
+
 代码家-干货集中营:http://gank.io/
 
 ##[我的博客](http://blog.csdn.net/libeyond_/article/details/60351885)
