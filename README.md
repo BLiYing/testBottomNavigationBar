@@ -4,7 +4,7 @@
 
 ![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/Screenshot1.png)
 
-![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/Screenshot2.png)
+![image](https://github.com/BLiYing/testBottomNavigationBar/blob/master/app/sreenshots/newgif.gif)
 
 ##关于RxJava 在Android中常用的使用案例,实在讲得好。 
 
@@ -34,7 +34,13 @@ MD设计之BottomNavigation
 https://github.com/Ashok-Varma/BottomNavigation
 
 ##API来源
+
 豆瓣：https://developers.douban.com/wiki/?title=movie_v2
+
 代码家-干货集中营:http://gank.io/
+
+##待更新
+
+视频页面展示还在继续开发当中
 
 ##[我的博客](http://blog.csdn.net/libeyond_/article/details/60351885)
