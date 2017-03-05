@@ -39,4 +39,8 @@ https://github.com/Ashok-Varma/BottomNavigation
 
 代码家-干货集中营:http://gank.io/
 
+##待更新
+
+视频页面展示还在继续开发当中
+
 ##[我的博客](http://blog.csdn.net/libeyond_/article/details/60351885)
