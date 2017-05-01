@@ -5,9 +5,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="colorControlHighlight">@color/reveal_color</item>-->
 
     </style>
 
@@ -23,6 +24,15 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/iosstyle_halftransparent_bg</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="InputStyle">
+        <!-- 底部线 默认颜色 -->
+        <item name="colorControlNormal">@color/login_line</item>
+        <!-- 底部线 EditText激活时颜色 -->
+        <item name="colorControlActivated">@android:color/white</item>
+        <!-- 设置光标 -->
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>

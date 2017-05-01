@@ -12,7 +12,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
@@ -23,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
+import com.example.wangchang.testbottomnavigationbar.base.BaseActivity;
 import com.example.wangchang.testbottomnavigationbar.base.SystemBarTintManager;
 import com.example.wangchang.testbottomnavigationbar.fragment.OneFragment;
 import com.example.wangchang.testbottomnavigationbar.listen.AppBarStateChangeListener;
@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
  * 电影详情页
  */
 @SuppressWarnings("ResourceAsColor")
-public class BookShowActivity extends AppCompatActivity {
+public class BookShowActivity extends BaseActivity {
 
     @BindView(R.id.image)
     ImageView image;

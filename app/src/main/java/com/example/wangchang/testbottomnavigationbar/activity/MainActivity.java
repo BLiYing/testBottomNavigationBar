@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
@@ -76,17 +75,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
                 );
         bottomNavigationBar.setBarBackgroundColor(R.color.page_bg);
-        toolBarHome.setBackgroundColor(ContextCompat.getColor(mContext,R.color.page_bg));
+//        toolBarHome.setBackgroundColor(ContextCompat.getColor(mContext,R.color.page_bg));
         numberBadgeItem = new BadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_book_white_24dp, "Books").setActiveColorResource(R.color.teal))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.blue))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.brown))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_videogame_asset_white_24dp, "Games").setActiveColorResource(R.color.grey).setBadgeItem(numberBadgeItem))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_book_white_24dp, "Books").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_videogame_asset_white_24dp, "Games").setActiveColorResource(R.color.white).setBadgeItem(numberBadgeItem))
                 .setFirstSelectedPosition(0)
                 .initialise();
 
