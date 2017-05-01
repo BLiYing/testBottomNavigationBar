@@ -31,6 +31,10 @@ import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 电影详情页
+ */
+@SuppressWarnings("ResourceAsColor")
 public class BookShowActivity extends AppCompatActivity {
 
     @BindView(R.id.image)
@@ -80,7 +84,7 @@ public class BookShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_show);
         mContext = this;
-        initSystemBar(R.color.transparent);
+
         ButterKnife.bind(this);
 //        toolbar.setTitle("飞机大作战");
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -120,10 +124,12 @@ public class BookShowActivity extends AppCompatActivity {
                 }else {
                     //中间状态
                     toolbarTitle.setVisibility(View.VISIBLE);
+                    tablayoutBtn.setVisibility(View.GONE);
                     toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
                 }
             }
         });
+        initSystemBar(R.color.transparent);
     }
     /**
      * Viewpager监听

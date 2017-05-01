@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
+@SuppressWarnings("ResourceAsColor")
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
     @BindView(R.id.toolBar_home)
     Toolbar toolBarHome;
@@ -89,17 +90,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setFirstSelectedPosition(0)
                 .initialise();
 
-//        fragments = getFragments();
-
-
-
-
-
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
         if(!NetUtil.isConnected(mContext)){
             bottomNavigationBar.unHide();
         }
+
     }
 
     private void initToolBar(String title,String subtitle,int resId) {
@@ -108,14 +104,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         toolBarHome.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(toolBarHome);
     }
-
-    /*private void initToolBarPosition_One() {
-        toolBarHome.setTitle("豆瓣电影Top250");
-        toolBarHome.setSubtitle("");
-//        toolBar.setLogo(R.mipmap.app_icon);
-        setSupportActionBar(toolBarHome);
-    }*/
-
     /**
      * 设置默认的
      */

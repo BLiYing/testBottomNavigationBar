@@ -52,7 +52,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.girl.GirlActivity" />
-        <activity android:name=".activity.BookShowActivity" />
+        <activity android:name=".activity.BookShowActivity"
+            />
         <!--<activity android:name=".activity.WelcomeActivity"></activity>-->
         <activity android:name=".activity.MainActivity"></activity>
     </application>
