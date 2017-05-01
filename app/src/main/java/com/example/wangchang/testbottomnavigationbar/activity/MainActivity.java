@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mContext = this;
         activity = this;
         ButterKnife.bind(this);
-        initToolBar();
+        initToolBar("清纯妹纸","Home",0);
         dialogHandler = new SimpleLoadDialog(MainActivity.this, null, true);
          bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
@@ -102,19 +102,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         }
     }
 
-    private void initToolBar() {
-        toolBarHome.setTitle("TapTap");
-        toolBarHome.setSubtitle("这里是子标题");
+    private void initToolBar(String title,String subtitle,int resId) {
+        toolBarHome.setTitle(title);
+        toolBarHome.setSubtitle(subtitle);
         toolBarHome.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(toolBarHome);
     }
 
-    private void initToolBarPosition_One() {
+    /*private void initToolBarPosition_One() {
         toolBarHome.setTitle("豆瓣电影Top250");
         toolBarHome.setSubtitle("");
 //        toolBar.setLogo(R.mipmap.app_icon);
         setSupportActionBar(toolBarHome);
-    }
+    }*/
 
     /**
      * 设置默认的
@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         FragmentTransaction transaction = fm.beginTransaction();
         switch (position) {
             case 0:
-                initToolBar();
+                initToolBar("清纯妹纸","Home",0);
                 if (homeFragment == null) {
                     homeFragment = (HomeFragment.newInstance("Home"));
                 }
@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 1:
-                initToolBarPosition_One();
+                initToolBar("豆瓣电影Top250","Books",0);
                 if (bookFragment == null) {
                     bookFragment = BookFragment.newInstance("Books");
                 }
@@ -167,6 +167,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 2:
+                initToolBar("梦幻音乐","Music",0);
                 if (musicFragment == null) {
                     musicFragment = MusicFragment.newInstance("Music");
                 }
@@ -174,6 +175,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 3:
+                initToolBar("眼观世界","Movies & TV",0);
                 if (tvFragment == null) {
                     tvFragment = TvFragment.newInstance("Movies & TV");
                 }
@@ -181,6 +183,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 4:
+                initToolBar("游戏频道","Games",0);
                 if (gameFragment == null) {
                     gameFragment = GameFragment.newInstance("Games");
                 }

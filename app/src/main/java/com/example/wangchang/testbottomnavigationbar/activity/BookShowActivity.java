@@ -23,16 +23,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
-import com.example.wangchang.testbottomnavigationbar.activity.bookshowfragment.ItemFragment;
-import com.example.wangchang.testbottomnavigationbar.activity.bookshowfragment.dummy.DummyContent;
 import com.example.wangchang.testbottomnavigationbar.base.SystemBarTintManager;
+import com.example.wangchang.testbottomnavigationbar.fragment.OneFragment;
 import com.example.wangchang.testbottomnavigationbar.listen.AppBarStateChangeListener;
 import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BookShowActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
+public class BookShowActivity extends AppCompatActivity {
 
     @BindView(R.id.image)
     ImageView image;
@@ -126,12 +125,6 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
             }
         });
     }
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
     /**
      * Viewpager监听
      */
@@ -146,11 +139,11 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new ItemFragment();
+                    return new OneFragment();
                 case 1:
-                    return new ItemFragment();
+                    return new OneFragment();
                 case 2:
-                    return new ItemFragment();
+                    return new OneFragment();
                 default:
                     return null;
             }
