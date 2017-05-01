@@ -4,7 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -14,15 +14,17 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
 import com.example.wangchang.testbottomnavigationbar.activity.bookshowfragment.ItemFragment;
-import com.example.wangchang.testbottomnavigationbar.base.BaseActivity;
+import com.example.wangchang.testbottomnavigationbar.activity.bookshowfragment.dummy.DummyContent;
 import com.example.wangchang.testbottomnavigationbar.base.SystemBarTintManager;
 import com.example.wangchang.testbottomnavigationbar.listen.AppBarStateChangeListener;
 import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
@@ -30,7 +32,7 @@ import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BookShowActivity extends AppCompatActivity {
+public class BookShowActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
 
     @BindView(R.id.image)
     ImageView image;
@@ -46,6 +48,8 @@ public class BookShowActivity extends AppCompatActivity {
     ViewPager viewPager;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+    @BindView(R.id.tablayout_btn)
+    Button tablayoutBtn;
 
 
     private Context mContext;
@@ -55,7 +59,7 @@ public class BookShowActivity extends AppCompatActivity {
     */
     @TargetApi(19)
     public void initSystemBar(int resColorId) {
-        if (android.os.Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19) {
 
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
@@ -98,32 +102,42 @@ public class BookShowActivity extends AppCompatActivity {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 LogUtil.e("State", state.name());
+
                 if (state == State.EXPANDED) {
                     //展开状态
-//                    initSystemBar(R.color.transparent);
                     toolbarTitle.setVisibility(View.INVISIBLE);
-                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.transparent));
+                    tablayoutBtn.setVisibility(View.GONE);
+                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
-//                    toolbarTitle.setVisibility(View.VISIBLE);
-//                    initSystemBar(R.color.page_bg);
-                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.page_bg));
+                   /* Button button = new Button(mContext);
+                    tabs.addView(button,3);*/
+                    tablayoutBtn.setVisibility(View.VISIBLE);
+                    collapsingToolbar.setCollapsedTitleGravity(Gravity.LEFT);
+
+                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.page_bg));
+                } else if(state == State.MIDLLE){
+//                    ToastUtils.show(mContext,"image不可见了");
                 }else {
                     //中间状态
                     toolbarTitle.setVisibility(View.VISIBLE);
-//                    initSystemBar(R.color.transparent);
-                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.transparent));
+                    toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
                 }
             }
         });
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
+
     /**
      * Viewpager监听
      */
-    class MyFragmentPagerAdaper extends FragmentPagerAdapter{
+    class MyFragmentPagerAdaper extends FragmentPagerAdapter {
 
-        public MyFragmentPagerAdaper(FragmentManager fragmentManager){
+        public MyFragmentPagerAdaper(FragmentManager fragmentManager) {
             super(fragmentManager);
 
         }
@@ -162,7 +176,6 @@ public class BookShowActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
 }

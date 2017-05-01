@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by liying on 17/2/27.
+ * Subject是继承Parcelable，而这里是集成Serializable
  */
 public class SubjectEntity implements Serializable{
 

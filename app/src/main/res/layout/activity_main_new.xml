@@ -46,9 +46,12 @@
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigation_bar"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        tools:targetApi="lollipop" />
 
 </android.support.design.widget.CoordinatorLayout>
 

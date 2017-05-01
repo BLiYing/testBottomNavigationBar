@@ -13,13 +13,13 @@ import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.wangchang.testbottomnavigationbar.R;
+import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
+import com.example.wangchang.testbottomnavigationbar.base.BaseActivity;
 import com.example.wangchang.testbottomnavigationbar.fragment.BookFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.GameFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.HomeFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.MusicFragment;
 import com.example.wangchang.testbottomnavigationbar.fragment.TvFragment;
-import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
-import com.example.wangchang.testbottomnavigationbar.base.BaseActivity;
 import com.example.wangchang.testbottomnavigationbar.util.NetUtil;
 import com.example.wangchang.testbottomnavigationbar.view.SimpleLoadDialog;
 
@@ -56,9 +56,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return lifecycleSubject;
     }
 
+    BottomNavigationBar bottomNavigationBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main_new);
 
         mContext = this;
@@ -66,7 +69,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         ButterKnife.bind(this);
         initToolBar();
         dialogHandler = new SimpleLoadDialog(MainActivity.this, null, true);
-        BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         bottomNavigationBar
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
@@ -87,15 +90,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .initialise();
 
 //        fragments = getFragments();
+
+
+
+
+
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
         if(!NetUtil.isConnected(mContext)){
             bottomNavigationBar.unHide();
         }
-
     }
-
-
 
     private void initToolBar() {
         toolBarHome.setTitle("TapTap");

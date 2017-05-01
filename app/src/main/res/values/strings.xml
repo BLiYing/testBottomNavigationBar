@@ -15,6 +15,12 @@
     <string name="title_tapdetail">详情</string>
     <string name="title_taprevaluate">评价</string>
     <string name="title_tapdiscuss">论坛</string>
+    <string name="title_btn">下载</string>
+
+    <string name="excusme">温馨提示</string>
+    <string name="excusme_content">需要获取文件读取权限</string>
+    <string name="excusme_cancel">取消</string>
+    <string name="excusme_sure">确定</string>
 
 
 </resources>

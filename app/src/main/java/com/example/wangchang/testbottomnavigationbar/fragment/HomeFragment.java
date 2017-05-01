@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             rootView = inflater.inflate(R.layout.fragment_home, container, false);
             mUnbinder = ButterKnife.bind(this, rootView);
             initView(rootView);
-            getGirls(size, page, true, CacheKey.FIRSTGETGIRLS, true, false, true);
+            getGirls(size, page, true, CacheKey.FIRSTGETGIRLS, true, true, true);
 
         }
         return rootView;
@@ -171,7 +171,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        getGirls(size, 1, true, CacheKey.FIRSTGETGIRLS, true, false, false);
+        getGirls(size, 1, true, CacheKey.FIRSTGETGIRLS, true, true, false);
         page = 1;
 
     }

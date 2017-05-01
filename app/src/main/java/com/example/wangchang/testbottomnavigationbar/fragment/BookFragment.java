@@ -60,8 +60,8 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private BookAdapter bookAdapter;
 
     private int start = 0;
-    private int count = 10;
-    private int start_count = 10;
+    private int count = 5;
+//    private int start_count = 5;
     private ArrayList<Subject> data;
 
 
@@ -192,16 +192,16 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        doGetDoubanMovie(start, start_count, true, CacheKey.MOVIEKEY, true, true, false);
+        doGetDoubanMovie(start, count, true, CacheKey.MOVIEKEY, false, false, false);
         start = 0;
     }
 
     @Override
     public void onLoadMore() {
-        if (data.size() % start_count == 0) {
+        if (data.size() % count == 0) {
             LogUtil.d(TAG, "onloadmore");
             start++;
-            doGetDoubanMovie(start, count, true, CacheKey.MOREMOVIEKEY, true, true, false);
+            doGetDoubanMovie(start, count, false, CacheKey.MOREMOVIEKEY+ String.valueOf(start), true, true, false);
         }
     }
 

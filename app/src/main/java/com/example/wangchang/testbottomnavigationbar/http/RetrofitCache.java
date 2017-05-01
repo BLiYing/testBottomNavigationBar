@@ -55,6 +55,7 @@ public class RetrofitCache {
             return fromNetwork;
         } else {
 //            return Observable.concat(fromCache, fromNetwork).first();
+            //若不强制刷新，则先读取缓存数据（即数据库中数据），当缓存不存在时则读取网络数据
             return Observable.concat(fromCache, fromNetwork).takeFirst(new Func1<T, Boolean>() {
                 @Override
                 public Boolean call(T t) {

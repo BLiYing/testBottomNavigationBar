@@ -1,22 +1,24 @@
 package com.example.wangchang.testbottomnavigationbar.widget;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 /**
  * 手势图片控件
  *
  * @author clifford
  */
-public class PinchImageView extends ImageView {
+@SuppressLint("AppCompatCustomView")
+public class PinchImageView extends AppCompatImageView {
 
     //图片缩放动画时间
     public static final int SCALE_ANIMATOR_DURATION = 200;
