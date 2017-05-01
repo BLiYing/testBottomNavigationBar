@@ -26,6 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
      * 权限判断
      */
     private static final int REQUECT_CODE_SDCARD = 2;
+    private static final long delay_time = 3000;
     private final static String locationPermission[] = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
@@ -61,7 +62,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
                 finish();
             }
-        },2000);
+        },delay_time);
 
     }
 
