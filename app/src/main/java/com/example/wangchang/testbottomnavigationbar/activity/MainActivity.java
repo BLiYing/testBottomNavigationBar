@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.animation.AlphaAnimation;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -60,8 +61,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_main_new);
 
         mContext = this;
@@ -88,6 +87,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .addItem(new BottomNavigationItem(R.mipmap.ic_videogame_asset_white_24dp, "Games").setActiveColorResource(R.color.white).setBadgeItem(numberBadgeItem))
                 .setFirstSelectedPosition(0)
                 .initialise();
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0,1);
+        alphaAnimation.setDuration(500);
+        bottomNavigationBar.setAnimation(alphaAnimation);
 
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);

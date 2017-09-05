@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +40,14 @@ import butterknife.Unbinder;
 import rx.Observable;
 
 import static android.content.ContentValues.TAG;
+import static com.example.wangchang.testbottomnavigationbar.R.id.gridRv;
 
 /**
  * Created by WangChang on 2016/5/15.
  */
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
-    @BindView(R.id.gridRv)
+    @BindView(gridRv)
     EasyRecyclerView mEasyRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -101,8 +102,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private void initView(View view) {
         data = new ArrayList<>();
         mHomeAdapter = new HomeAdapter(mContext);
-//        gridRv.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        mEasyRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mEasyRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+//        mEasyRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mEasyRecyclerView.setAdapterWithProgress(mHomeAdapter);
         mHomeAdapter.setMore(R.layout.load_more_layout, this);
         mHomeAdapter.setNoMore(R.layout.no_more_layout);

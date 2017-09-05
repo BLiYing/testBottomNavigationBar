@@ -12,6 +12,7 @@
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/book_erv"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

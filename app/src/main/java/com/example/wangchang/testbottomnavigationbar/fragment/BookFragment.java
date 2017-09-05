@@ -8,10 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
@@ -124,6 +127,16 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
         });
+    }
+
+    private void runLayoutAnimation(final RecyclerView recyclerView) {
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     private void doGetDoubanMovie(int start, int count,

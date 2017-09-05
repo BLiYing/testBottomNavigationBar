@@ -1,9 +1,11 @@
 package com.example.wangchang.testbottomnavigationbar.activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -110,6 +112,9 @@ public class BookShowActivity extends BaseActivity {
                     //展开状态
                     toolbarTitle.setVisibility(View.INVISIBLE);
                     tablayoutBtn.setVisibility(View.GONE);
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        getWindow().setStatusBarColor(Color.TRANSPARENT);
+                    }
                     toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
@@ -129,8 +134,38 @@ public class BookShowActivity extends BaseActivity {
                 }
             }
         });
-        initSystemBar(R.color.transparent);
+//        initSystemBar(R.color.transparent);
+        /*if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+           actionBar.hide();*/
+        setImage(this);
     }
+
+    /**
+     * 当顶部是图片时，是图片显示到状态栏上
+     * @param activity
+     */
+    private void setImage(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //5.0及以上，不设置透明状态栏，设置会有半透明阴影
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //是activity_main。xml中的图片可以沉浸到状态栏上
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //设置状态栏颜色透明。
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            //。。。。
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
     /**
      * Viewpager监听
      */

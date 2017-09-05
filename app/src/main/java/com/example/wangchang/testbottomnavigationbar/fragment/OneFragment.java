@@ -95,6 +95,7 @@ public class OneFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         bookAdapter.setMore(R.layout.load_more_layout, this);
         bookAdapter.setNoMore(R.layout.no_more_layout);
         bookAdapter.setError(R.layout.error_layout);
+        swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
         swipeRefreshLayout.setProgressViewOffset(false, DataKey.swipeStart, DataKey.swipeEnd);
 //        swipeRefreshLayout.setProgressViewEndTarget (true,200);
