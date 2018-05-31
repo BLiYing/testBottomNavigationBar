@@ -2,8 +2,6 @@ package com.example.wangchang.testbottomnavigationbar.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,7 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -98,7 +97,7 @@ public class BookShowActivity extends BaseActivity {
                 finish();
             }
         });
-        viewPager.setAdapter(new MyFragmentPagerAdaper(getFragmentManager()));
+        viewPager.setAdapter(new MyFragmentPagerAdaper(getSupportFragmentManager()));
 
         tabs.setBackgroundColor(ContextCompat.getColor(this, R.color.title_color));
         tabs.setupWithViewPager(viewPager);
@@ -177,7 +176,7 @@ public class BookShowActivity extends BaseActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             switch (position) {
                 case 0:
                     return new OneFragment();
