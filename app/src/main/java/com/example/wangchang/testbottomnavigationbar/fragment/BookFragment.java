@@ -101,6 +101,9 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void initView(View view) {
+        Intent intent = new Intent();
+        intent.setClass(mContext, BookShowActivity.class);
+        mContext.startActivity(intent);
         data = new ArrayList<>();
 
         bookAdapter = new BookAdapter(mContext);

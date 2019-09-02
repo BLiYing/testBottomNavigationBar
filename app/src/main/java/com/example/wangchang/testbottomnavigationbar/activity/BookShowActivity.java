@@ -1,21 +1,23 @@
 package com.example.wangchang.testbottomnavigationbar.activity;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -40,12 +42,15 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
     Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @BindView(android.R.id.tabs)
-    TabLayout tabs;
+
     @BindView(R.id.appbar)
     AppBarLayout appbar;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(android.R.id.tabs)
+    TabLayout tabs;
+
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.tablayout_btn)
@@ -93,10 +98,9 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
                 finish();
             }
         });
-        viewPager.setAdapter(new MyFragmentPagerAdaper(getFragmentManager()));
+        viewPager.setAdapter(new MyFragmentPagerAdaper(getSupportFragmentManager()));
 
         tabs.setBackgroundColor(ContextCompat.getColor(this, R.color.title_color));
-        tabs.setupWithViewPager(viewPager);
 
         appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
@@ -125,6 +129,11 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
                 }
             }
         });
+
+        viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(2);
+        tabs.setupWithViewPager(viewPager);
+
     }
 
     @Override
@@ -149,17 +158,22 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
                     return new ItemFragment();
                 case 1:
                     return new ItemFragment();
-                case 2:
-                    return new ItemFragment();
+               /* case 2:
+                    return new ItemFragment();*/
                 default:
-                    return null;
+                    return new ItemFragment();
             }
 
         }
 
         @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+        }
+
+        @Override
         public int getCount() {
-            return 3;
+            return 10;
         }
 
         @Override
@@ -169,8 +183,8 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
                     return getString(R.string.title_tapdetail);
                 case 1:
                     return getString(R.string.title_taprevaluate);
-                case 2:
-                    return getString(R.string.title_tapdiscuss);
+              /*  case 2:
+                    return getString(R.string.title_tapdiscuss);*/
                 default:
                     return "基本";
             }

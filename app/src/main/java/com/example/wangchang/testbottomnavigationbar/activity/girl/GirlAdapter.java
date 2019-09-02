@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.wangchang.testbottomnavigationbar.R;
 import com.example.wangchang.testbottomnavigationbar.widget.PinchImageView;
 import com.example.wangchang.testbottomnavigationbar.enity.ResultsEntity;
@@ -51,12 +54,17 @@ public class GirlAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.item_girl_detail, container, false);
         PinchImageView imageView = (PinchImageView) view.findViewById(R.id.img);
 
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.app_icon)
+                .error(R.drawable.icon_error)
+                .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
+
+
         Glide.with(mContext)
                 .load(imageUrl)
-                .thumbnail(0.2f)
-                .placeholder(R.mipmap.app_icon)
-                .crossFade()
-                .error(R.drawable.icon_error)
+                .apply(options)
                 .into(imageView);
         container.addView(view);
         return view;

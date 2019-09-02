@@ -48,6 +48,7 @@ public class GirlActivity extends AppActivity implements GirlFragment.OnGirlChan
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
+
     }
 
     private void initView() {

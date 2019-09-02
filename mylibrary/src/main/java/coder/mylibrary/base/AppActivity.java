@@ -1,5 +1,6 @@
 package coder.mylibrary.base;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ public abstract class AppActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public abstract class AppActivity extends BaseActivity {
             handleIntent(getIntent());
         }
         //避免重复添加Fragment
-        if (null == getSupportFragmentManager().getFragments()) {
+        if (null == getSupportFragmentManager().getFragments() || getSupportFragmentManager().getFragments().size() == 0) {
             BaseFragment firstFragment = getFirstFragment();
             if (null != firstFragment) {
                 addFragment(firstFragment);
