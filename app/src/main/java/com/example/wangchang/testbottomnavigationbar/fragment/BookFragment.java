@@ -243,6 +243,9 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     doGetDoubanMovie(start, count, true, CacheKey.MOVIEKEY, true, true, false);
                 }
             });
+        Intent intent = new Intent();
+        intent.setClass(mContext, BookShowActivity.class);
+        mContext.startActivity(intent);
     }
 
     public void showNormal() {
