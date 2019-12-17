@@ -1,6 +1,7 @@
 package com.example.wangchang.testbottomnavigationbar.base;
 
 import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -21,7 +22,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         lifecycleSubject.onNext(ActivityLifeCycleEvent.CREATE);
-        initSystemBar();
+        if (Build.VERSION.SDK_INT < 21) {
+            initSystemBar();
+        }
+//
         super.onCreate(savedInstanceState);
     }
 

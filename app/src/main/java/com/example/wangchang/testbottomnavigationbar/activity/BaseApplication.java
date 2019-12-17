@@ -19,7 +19,7 @@ public class BaseApplication extends Application implements Thread.UncaughtExcep
     @Override
     public void onCreate() {
         super.onCreate();
-
+//        LitePal.initialize(this);
         mApplication = this;
         Hawk.init(this).build();
         //配置是否显示log

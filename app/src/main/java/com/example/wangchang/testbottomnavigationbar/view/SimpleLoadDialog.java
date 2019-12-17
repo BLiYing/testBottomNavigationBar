@@ -61,7 +61,7 @@ public class SimpleLoadDialog extends Handler{
             dialogWindow.setGravity(Gravity.CENTER_VERTICAL
                     | Gravity.CENTER_HORIZONTAL);
         }
-        if (!load.isShowing()&&context!=null) {
+        if (!load.isShowing() && context!=null) {
             load.show();
         }
     }

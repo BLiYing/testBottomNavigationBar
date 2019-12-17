@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorAccent">#FFFFFF</color>
 
 
     <color name="teal">#00796B</color>
@@ -12,10 +12,12 @@
     <color name="orange">#F57C00</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="page_bg">#14b9c8</color>
+    <color name="page_bg">#2196F3</color>
     <color name="title_color">#ffffff</color>
     <color name="tablayout_title_color">#7D7D7D</color>
 
     <color name="transparent">#00000000</color>
+    <color name="reveal_color">#1A000000</color>
+    <color name="login_line">#C1E3F4</color>
 
 </resources>

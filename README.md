@@ -16,14 +16,6 @@ http://blog.csdn.net/johnny901114/article/details/51568562
 
 https://github.com/chiclaim/awesome_android_rxjava
 
-##代码参考来源: 
-
-
-郭霖微信公号转载：
-
-[Android RxJava+Retrofit完美封装](http://mp.weixin.qq.com/s/sM8tp7dmTinRK2-01a1uoQ)
-
-
 干货集中营：
 
 https://github.com/PleaseCallMeCoder/PrettyGirls

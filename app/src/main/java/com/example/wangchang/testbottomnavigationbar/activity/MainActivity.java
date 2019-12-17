@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.animation.AlphaAnimation;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
+@SuppressWarnings("ResourceAsColor")
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
     @BindView(R.id.toolBar_home)
     Toolbar toolBarHome;
@@ -60,14 +61,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_main_new);
 
         mContext = this;
         activity = this;
         ButterKnife.bind(this);
-        initToolBar();
+        initToolBar("清纯妹纸","Home",0);
         dialogHandler = new SimpleLoadDialog(MainActivity.this, null, true);
          bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
@@ -75,47 +74,37 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
                 );
         bottomNavigationBar.setBarBackgroundColor(R.color.page_bg);
-        toolBarHome.setBackgroundColor(ContextCompat.getColor(mContext,R.color.page_bg));
+//        toolBarHome.setBackgroundColor(ContextCompat.getColor(mContext,R.color.page_bg));
         numberBadgeItem = new BadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_book_white_24dp, "Books").setActiveColorResource(R.color.teal))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.blue))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.brown))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_videogame_asset_white_24dp, "Games").setActiveColorResource(R.color.grey).setBadgeItem(numberBadgeItem))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_book_white_24dp, "Books").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.white))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_videogame_asset_white_24dp, "Games").setActiveColorResource(R.color.white).setBadgeItem(numberBadgeItem))
                 .setFirstSelectedPosition(0)
                 .initialise();
-
-//        fragments = getFragments();
-
-
-
-
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0,1);
+        alphaAnimation.setDuration(500);
+        bottomNavigationBar.setAnimation(alphaAnimation);
 
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
         if(!NetUtil.isConnected(mContext)){
             bottomNavigationBar.unHide();
         }
+
     }
 
-    private void initToolBar() {
-        toolBarHome.setTitle("TapTap");
-        toolBarHome.setSubtitle("这里是子标题");
+    private void initToolBar(String title,String subtitle,int resId) {
+        toolBarHome.setTitle(title);
+        toolBarHome.setSubtitle(subtitle);
         toolBarHome.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(toolBarHome);
     }
-
-    private void initToolBarPosition_One() {
-        toolBarHome.setTitle("豆瓣电影Top250");
-        toolBarHome.setSubtitle("");
-//        toolBar.setLogo(R.mipmap.app_icon);
-        setSupportActionBar(toolBarHome);
-    }
-
     /**
      * 设置默认的
      */
@@ -150,7 +139,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         FragmentTransaction transaction = fm.beginTransaction();
         switch (position) {
             case 0:
-                initToolBar();
+                initToolBar("清纯妹纸","Home",0);
                 if (homeFragment == null) {
                     homeFragment = (HomeFragment.newInstance("Home"));
                 }
@@ -159,7 +148,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 1:
-                initToolBarPosition_One();
+                initToolBar("豆瓣电影Top250","Books",0);
                 if (bookFragment == null) {
                     bookFragment = BookFragment.newInstance("Books");
                 }
@@ -167,6 +156,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 2:
+                initToolBar("梦幻音乐","Music",0);
                 if (musicFragment == null) {
                     musicFragment = MusicFragment.newInstance("Music");
                 }
@@ -174,6 +164,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 3:
+                initToolBar("眼观世界","Movies & TV",0);
                 if (tvFragment == null) {
                     tvFragment = TvFragment.newInstance("Movies & TV");
                 }
@@ -181,6 +172,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.commit();
                 break;
             case 4:
+                initToolBar("游戏频道","Games",0);
                 if (gameFragment == null) {
                     gameFragment = GameFragment.newInstance("Games");
                 }

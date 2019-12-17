@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.wangchang.testbottomnavigationbar.R;
 import com.zhy.m.permission.MPermissions;
@@ -16,11 +19,13 @@ import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 import com.zhy.m.permission.ShowRequestPermissionRationale;
 
+
 public class WelcomeActivity extends AppCompatActivity {
     /**
      * 权限判断
      */
     private static final int REQUECT_CODE_SDCARD = 2;
+    private static final long delay_time = 3000;
     private final static String locationPermission[] = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
@@ -50,7 +55,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @PermissionGrant(REQUECT_CODE_SDCARD)
     public void requestSdcardSuccess() {
-        startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+                finish();
+            }
+        },delay_time);
+
     }
 
     @PermissionDenied(REQUECT_CODE_SDCARD)
@@ -69,7 +81,8 @@ public class WelcomeActivity extends AppCompatActivity {
     @ShowRequestPermissionRationale(REQUECT_CODE_SDCARD)
     public void showdialog() {
         if (warningdialog != null) {
-            return;
+            warningdialog.dismiss();
+            warningdialog = null;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
         builder.setCancelable(false);
@@ -79,7 +92,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                        warningdialog = null;
-                        MPermissions.requestPermissions(WelcomeActivity.this, REQUECT_CODE_SDCARD, Manifest.permission.CAMERA);
+                        MPermissions.requestPermissions(WelcomeActivity.this, REQUECT_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     }
                 })
                 .setNegativeButton(R.string.excusme_cancel, new DialogInterface.OnClickListener() {
@@ -95,7 +108,21 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        // 设置无标题
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 设置全屏
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        setContentView(R.layout.activity_welcome);
+        /**
+         * 完全沉浸式
+         */
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(option);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+           actionBar.hide();
+
         // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!hasCompleteLOCATION()) {

@@ -1,36 +1,29 @@
 package com.example.wangchang.testbottomnavigationbar.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.example.wangchang.testbottomnavigationbar.R;
-import com.example.wangchang.testbottomnavigationbar.activity.BookShowActivity;
 import com.example.wangchang.testbottomnavigationbar.activity.MainActivity;
 import com.example.wangchang.testbottomnavigationbar.adapter.BookAdapter;
 import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
+import com.example.wangchang.testbottomnavigationbar.base.BaseFragment;
 import com.example.wangchang.testbottomnavigationbar.base.CacheKey;
 import com.example.wangchang.testbottomnavigationbar.base.DataKey;
 import com.example.wangchang.testbottomnavigationbar.enity.Subject;
 import com.example.wangchang.testbottomnavigationbar.http.Api;
 import com.example.wangchang.testbottomnavigationbar.http.HttpUtil;
 import com.example.wangchang.testbottomnavigationbar.http.ProgressSubscriber;
-import com.example.wangchang.testbottomnavigationbar.util.LogUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
@@ -41,13 +34,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rx.Observable;
 
-import static android.content.ContentValues.TAG;
-
 /**
- * Created by WangChang on 2016/5/15.
+ * Description:
+ * Created by administrator
+ * on 2017-5-1.
  */
-public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
+public class OneFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener{
 
     @BindView(R.id.book_erv)
     EasyRecyclerView bookErv;
@@ -64,30 +57,19 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private int start = 0;
     private int count = 5;
-//    private int start_count = 5;
+    //    private int start_count = 5;
     private ArrayList<Subject> data;
 
 
     private View networkErrorView;
-
-    public static BookFragment newInstance(String content) {
-        Bundle args = new Bundle();
-        args.putString("ARGS", content);
-        BookFragment fragment = new BookFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this.getActivity();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (rootView != null) {
             ViewGroup viewGroup = (ViewGroup) rootView.getParent();
             if (viewGroup != null) {
@@ -97,16 +79,14 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             rootView = inflater.inflate(R.layout.fragment_book, container, false);
             mUnbinder = ButterKnife.bind(this, rootView);
             initView(rootView);
-            doGetDoubanMovie(start, count, true, CacheKey.MOVIEKEY, true, true, true);
+            doGetDoubanMovie(start, count, true, CacheKey.MOVIEKEY, true, false, false);
+
         }
 
         return rootView;
     }
 
     private void initView(View view) {
-        Intent intent = new Intent();
-        intent.setClass(mContext, BookShowActivity.class);
-        mContext.startActivity(intent);
         data = new ArrayList<>();
 
         bookAdapter = new BookAdapter(mContext);
@@ -115,11 +95,12 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         bookAdapter.setMore(R.layout.load_more_layout, this);
         bookAdapter.setNoMore(R.layout.no_more_layout);
         bookAdapter.setError(R.layout.error_layout);
+        swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
         swipeRefreshLayout.setProgressViewOffset(false, DataKey.swipeStart, DataKey.swipeEnd);
 //        swipeRefreshLayout.setProgressViewEndTarget (true,200);
         swipeRefreshLayout.setOnRefreshListener(this);
-        bookAdapter.setOnItemClickListener(new BookAdapter.BookItemOnclickListen() {
+        /*bookAdapter.setOnItemClickListener(new BookAdapter.BookItemOnclickListen() {
             @Override
             public void onItemClick(int position, BaseViewHolder viewHold) {
                 Intent intent = new Intent();
@@ -129,17 +110,7 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
 
-        });
-    }
-
-    private void runLayoutAnimation(final RecyclerView recyclerView) {
-        final Context context = recyclerView.getContext();
-        final LayoutAnimationController controller =
-                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
-
-        recyclerView.setLayoutAnimation(controller);
-        recyclerView.getAdapter().notifyDataSetChanged();
-        recyclerView.scheduleLayoutAnimation();
+        });*/
     }
 
     private void doGetDoubanMovie(int start, int count,
@@ -215,7 +186,6 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onLoadMore() {
         if (data.size() % count == 0) {
-            LogUtil.d(TAG, "onloadmore");
             start++;
             doGetDoubanMovie(start, count, false, CacheKey.MOREMOVIEKEY+ String.valueOf(start), true, true, false);
         }
@@ -256,9 +226,6 @@ public class BookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     doGetDoubanMovie(start, count, true, CacheKey.MOVIEKEY, true, true, false);
                 }
             });
-        Intent intent = new Intent();
-        intent.setClass(mContext, BookShowActivity.class);
-        mContext.startActivity(intent);
     }
 
     public void showNormal() {
