@@ -11,10 +11,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wangchang.testbottomnavigationbar.R;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
-import com.zhy.m.permission.ShowRequestPermissionRationale;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class WelcomeActivity extends AppCompatActivity {
     /**
@@ -30,8 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
      *
      * @return true表示有
      */
-    private boolean hasCompleteLOCATION() {
-        // TODO Auto-generated method stub
+    private boolean hasCompletePermission() {
 
         PackageManager pm = this.getPackageManager();
         for (String auth : locationPermission) {
@@ -44,29 +42,29 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @PermissionGrant(REQUECT_CODE_SDCARD)
+    @AfterPermissionGranted(REQUECT_CODE_SDCARD)
     public void requestSdcardSuccess() {
-        startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+        if (EasyPermissions.hasPermissions(this, locationPermission)) {
+            // Already have permission, do the thing
+            startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+        } else {
+            // Do not have permissions, request them now
+            requestSdcardFailed();
+
+        }
     }
 
-    @PermissionDenied(REQUECT_CODE_SDCARD)
     public void requestSdcardFailed() {
-        if (!hasCompleteLOCATION()) {
-            showdialog();
-            if (!MPermissions.shouldShowRequestPermissionRationale(WelcomeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUECT_CODE_SDCARD)) {
-                MPermissions.requestPermissions(WelcomeActivity.this, REQUECT_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            }
-        }
+        showdialog();
     }
 
 
     private Dialog warningdialog;
 
-    @ShowRequestPermissionRationale(REQUECT_CODE_SDCARD)
     public void showdialog() {
         if (warningdialog != null) {
             return;
@@ -78,8 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.excusme_sure, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        warningdialog = null;
-                        MPermissions.requestPermissions(WelcomeActivity.this, REQUECT_CODE_SDCARD, Manifest.permission.CAMERA);
+                        EasyPermissions.requestPermissions(WelcomeActivity.this, getString(R.string.excusme_content), REQUECT_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     }
                 })
                 .setNegativeButton(R.string.excusme_cancel, new DialogInterface.OnClickListener() {
@@ -98,13 +95,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!hasCompleteLOCATION()) {
-                MPermissions.requestPermissions(WelcomeActivity.this, REQUECT_CODE_SDCARD,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            } else {
-                requestSdcardSuccess();
-
-            }
+            EasyPermissions.requestPermissions(WelcomeActivity.this, getString(R.string.excusme_content), REQUECT_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         } else {
             requestSdcardSuccess();
 
