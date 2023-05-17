@@ -1,7 +1,7 @@
 package com.example.wangchang.testbottomnavigationbar.http;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.example.wangchang.testbottomnavigationbar.base.ActivityLifeCycleEvent;
 import com.example.wangchang.testbottomnavigationbar.enity.HttpResultGank;

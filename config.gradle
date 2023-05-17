@@ -1,7 +1,7 @@
 ext {
     android = [
-            compileSdkVersion: 27,
-            buildToolsVersion: "27.0.3",
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
             applicationId    : "com.example.wangchang.testbottomnavigationbar",
             versionCode      : 1,
             versionName      : "1.1.1",
@@ -16,11 +16,11 @@ ext {
 
     dependencies = [
             // support.
-            appcompat                    : "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
-            support                      : "com.android.support:support-v4:$rootProject.supportLibraryVersion",
-            recyclerview                 : "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion",
-            design                       : "com.android.support:design:$rootProject.supportLibraryVersion",
-            cardview                     : "com.android.support:cardview-v7:$rootProject.supportLibraryVersion",
+            appcompat                    : "androidx.appcompat:appcompat:1.0.0",
+            support                      : "androidx.legacy:legacy-support-v4:1.0.0",
+            recyclerview                 : "androidx.recyclerview:recyclerview:1.0.0",
+            design                       : "com.google.android.material:material:1.0.0",
+            cardview                     : "androidx.cardview:cardview:1.0.0",
             constraint                   : "com.android.support.constraint:constraint-layout:1.1.2",
             support_dynamic_animation    : "com.android.support:support-dynamic-animation:$rootProject.supportLibraryVersion",
             // json 解析.

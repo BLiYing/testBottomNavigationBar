@@ -1,19 +1,19 @@
 package com.example.wangchang.testbottomnavigationbar.activity;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.tabs.TabLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -93,7 +93,7 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
                 finish();
             }
         });
-        viewPager.setAdapter(new MyFragmentPagerAdaper(getFragmentManager()));
+        viewPager.setAdapter(new MyFragmentPagerAdaper(getSupportFragmentManager()));
 
         tabs.setBackgroundColor(ContextCompat.getColor(this, R.color.title_color));
         tabs.setupWithViewPager(viewPager);
@@ -146,9 +146,7 @@ public class BookShowActivity extends AppCompatActivity implements ItemFragment.
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new ItemFragment();
                 case 1:
-                    return new ItemFragment();
                 case 2:
                     return new ItemFragment();
                 default:
