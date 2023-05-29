@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 },
                 cacheKey,
                 ActivityLifeCycleEvent.CREATE,
-                MainActivity.getInstance().getLifeSubject(),
+                ((MainActivity)getActivity()).getLifeSubject(),
                 issave,
                 forceRefresh,
                 isShowDialog);

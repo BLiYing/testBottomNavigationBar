@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.wangchang.testbottomnavigationbar"> <!-- 忽略最低版本限制 -->
-    <uses-sdk tools:overrideLibrary="coder.mylibrary" />
+    package="com.example.wangchang.testbottomnavigationbar">
 
+    <application
+        android:name=".activity.BaseApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name=".googlemvp.activity.TestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity android:name=".activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.girl.GirlActivity" />
+        <activity android:name=".activity.BookShowActivity" /> <!-- <activity android:name=".activity.WelcomeActivity"></activity> -->
+        <activity android:name=".activity.MainActivity" />
+    </application>
     <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <!-- 这个权限用于进行网络定位 -->
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
@@ -32,29 +58,6 @@
     <!-- 显示系统窗口 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <!-- 读取系统底层日志 -->
-    <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
-    <!-- <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" /> -->
-    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
-    <application
-        android:name=".activity.BaseApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/app_icon"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
-        <activity android:name=".activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.girl.GirlActivity" />
-        <activity android:name=".activity.BookShowActivity" />
-        <!--<activity android:name=".activity.WelcomeActivity"></activity>-->
-        <activity android:name=".activity.MainActivity"></activity>
-    </application>
+    <uses-sdk tools:overrideLibrary="coder.mylibrary" />
 
 </manifest>
