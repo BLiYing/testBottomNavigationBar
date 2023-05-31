@@ -15,17 +15,18 @@ ext {
 
     dependencies = [
             // support.
-            appcompat                    : "androidx.appcompat:appcompat:1.0.0",
-            support                      : "androidx.legacy:legacy-support-v4:1.0.0",
-            recyclerview                 : "androidx.recyclerview:recyclerview:1.0.0",
-            design                       : "com.google.android.material:material:1.0.0",
-            cardview                     : "androidx.cardview:cardview:1.0.0",
-            constraint                   : "com.android.support.constraint:constraint-layout:1.1.2",
+            appcompat     : "androidx.appcompat:appcompat:1.0.0",
+            support       : "androidx.legacy:legacy-support-v4:1.0.0",
+            recyclerview  : "androidx.recyclerview:recyclerview:1.0.0",
+            design        : "com.google.android.material:material:1.0.0",
+            cardview      : "androidx.cardview:cardview:1.0.0",
+            constraint    : "com.android.support.constraint:constraint-layout:1.1.2",
             // json 解析.
-            gson                         : 'com.google.code.gson:gson:2.8.0',
+            gson          : 'com.google.code.gson:gson:2.8.0',
 
             //图片加载
-            glide                        : 'com.github.bumptech.glide:glide:4.0.0'
-         ]
+            glide         : 'com.github.bumptech.glide:glide:4.0.0',
+            loginterceptor: 'com.parkingwang:okhttp3-loginterceptor:latest.integration'
+    ]
 
 }

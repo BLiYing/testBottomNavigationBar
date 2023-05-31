@@ -64,4 +64,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     kapt 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation rootProject.ext.dependencies.loginterceptor
 }
